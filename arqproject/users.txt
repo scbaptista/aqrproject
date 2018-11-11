@@ -1,0 +1,7 @@
+{'nome':'sandra', 'email':'sandra@tecxan.com', 'pass':'qaz'}
+{'nome':'teste', 'email':'teste@teste.pt', 'pass':'wsx'}
+{'nome':'teste', 'email':'testeuduud@dsd.pt', 'pass':'qazzz'}
+{'nome':'teste', 'email':'teste@s.pt', 'pass':'wsx'}
+{'nome':'san', 'email':'san@as.pt', 'pass':'qaz'}
+{'nome':'sas', 'email':'sa@as.pt', 'pass':'sas'}
+{'nome':'s', 'email':'s@s.pt', 'pass':'s'}
