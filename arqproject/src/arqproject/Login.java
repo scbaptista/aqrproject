@@ -17,7 +17,7 @@ public class Login {
 	@SuppressWarnings("resource")
 	public String doLogin() throws Exception{
 		
-		String f = "users.txt";
+		String f = "files/users.txt";
 		
 		Scanner keyboard = new Scanner (System.in);
 		System.out.println();

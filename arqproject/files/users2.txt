@@ -5,3 +5,5 @@
 {'nome':'san', 'email':'san@as.pt', 'pass':'qaz'}
 {'nome':'sas', 'email':'sa@as.pt', 'pass':'sas'}
 {'nome':'s', 'email':'s@s.pt', 'pass':'s'}
+{'nome':'jskajsd', 'email':'ass@s.pt', 'pass':'qaz'}
+{'descricao':'FC Barcelona–SC Braga', 'apostas':'[1.38,4.40,8.00]',   'codeaposta':'ap1'}
