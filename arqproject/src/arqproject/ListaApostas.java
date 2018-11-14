@@ -9,7 +9,7 @@ public class ListaApostas {
 	@SuppressWarnings("resource")
 	public void getListApostas() {
 		
-		
+		System.out.println("ola");
 		try {
 			String f = "apostas.txt";
 			Scanner sc = new Scanner(new File(f));
