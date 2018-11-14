@@ -1,0 +1,47 @@
+================= aegisBET ================= 
+
+Termo aegis: Escudo mágico que Zeus utilizou em sua luta contra os titãs que representa segurança.
+
+Logo ==> logomakr.com/5m0cDv
+
+Relatório ==> https://www.overleaf.com/read/kvrtzwpqnqzk
+
+
+============ Levantamento de Requisitos ============
+
+Requirements
+
+1. Os apostadores devem criar conta (email, nome, quantia)
+2. A quantia deve ser representada em ESScoins
+3. O apostador devera ter disponível uma lista de eventos
+4. O apostador poderá efetuar aposta, indicando o valor e o resultado pretendido
+4.1. O apostador apenas deve poder apostar num resultado
+4.2. Apenas devem existir 3 tipos de aposta por evento: Vitória Equipa A; Empate; Vitoria Equipa B;
+4.3. Cada tipo deve estar identificado com a respetiva ODD
+
+5. A aplicação deverá manter uma lista de aposta por utilizador
+
+6. Um evento de aposta deve ter dois estados: Aberto e Fechado
+6.1. Quando um evento passa para Fechado, todos os apostadores no evento, com o resultado e/ou valor ganho 
+7. O valor ganho deve ser calculado pelo (valor de aposta) * odd
+7.1 Se o tipo indicado não for o vencedor, o apostador ganha 0 ESScoins
+
+Stakeholders
+
+- Programadores/Arquitetos de Software
+- Apostadores 
+- Orientadores/Professores 
+
+Constraints
+
+> Tecnico
+-> Implementação numa linguagem Orientada a Objetos (JAVA)
+-> Deve executar em macOS,Linux e Windows
+> Organizacional
+-> Equipa (Sandra Baptista & Alexandre Teixeira)
+-> Cronologia (Outubro de 2018 até 6 de Dezembro de 2018)
+-> IDE (Netbeans)
+
+Estrategias de Solução
+
+  
