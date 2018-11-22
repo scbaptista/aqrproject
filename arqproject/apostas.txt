@@ -1,2 +1,0 @@
-{'descricao':'FC Barcelona	–	SC Braga', 'apostas':'(1->1.38	,	2->4.40,	3->8.00)', 'codeaposta':'ap1'}
-{'descricao':'Benfica	– Braga', 'apostas':'(1->1.38	,	2->4.40,	3->8.00)', 'codeaposta':'ap2'}
