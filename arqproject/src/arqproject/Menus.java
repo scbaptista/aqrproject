@@ -17,8 +17,9 @@ public class Menus {
 		System.out.println("Bem vindo, " + user);
 		System.out.println("-------------------------\n");
 		System.out.println("1 - Ver lista de apostas");
-		System.out.println("2 - Historico");
-		System.out.println("3 - Sair");
+		System.out.println("2 - Perfile");
+		System.out.println("3 - Historico");
+		System.out.println("4 - Sair");
 		System.out.println("-------------------------\n");
 	}
 
@@ -34,6 +35,15 @@ public class Menus {
 		System.out.println("");
 		System.out.println("-------------------------\n");
 		System.out.println("1 - Voltar");
+		System.out.println("-------------------------\n");
+	}
+	
+	
+	public void menuProfile() {
+		System.out.println("");
+		System.out.println("1 - Editar");
+		System.out.println("2 - Apagar");
+		System.out.println("3 - Voltar");
 		System.out.println("-------------------------\n");
 	}
 }

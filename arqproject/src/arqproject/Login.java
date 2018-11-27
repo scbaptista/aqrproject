@@ -1,47 +1,46 @@
 package arqproject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.stream.Stream;
+import org.bson.Document;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+
+import arqproject.obj.UsersObj;
+import arqproject.utils.ConnectDb;
 
 public class Login {
 
 	@SuppressWarnings("resource")
-	public String doLogin() throws Exception{
-		
-		String f = "files/users.txt";
-		
+	public UsersObj doLogin() throws Exception{
+	
 		Scanner keyboard = new Scanner (System.in);
 		System.out.println();
 		System.out.println("---------------------------------------");
 		System.out.println("email:");
-		String user = keyboard.nextLine();
+		String email = keyboard.nextLine();
 		System.out.println("Pass:");
 		String pass = keyboard.nextLine(); 
 
-		 Scanner sc = new Scanner(new File(f)); 
+		 ConnectDb con = new ConnectDb();
+		 MongoCollection<Document> table = con.getCon().getCollection("users"); 
+		 FindIterable<Document> iterDoc = table.find();
 		 
-		 String finalResult = null;
-		 while (sc.hasNextLine()){ 
-			 String line = sc.nextLine();
-			JsonElement jelement = new JsonParser().parse(line);
-		    JsonObject jobject = jelement.getAsJsonObject();
-
-		    if(user.equals(jobject.get("nome").getAsString()) && pass.equals(jobject.get("pass").getAsString())){
-		    	finalResult = line;
-		    }
-		  
-		 } 
-
-		return finalResult;
+		 UsersObj user = new UsersObj();
+		 
+		 for (Document iterable_element : iterDoc) {
+			 if(iterable_element.containsValue(email) && iterable_element.containsValue(pass)){
+				 user.setId(iterable_element.get("_id").toString());
+				 user.setNome(iterable_element.get("nome").toString());
+					
+			 }
+		 }
+		
+		
+		return user;
 		
 	}
 

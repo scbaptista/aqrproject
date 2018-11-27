@@ -2,18 +2,14 @@ package arqproject;
 
 import java.util.Scanner;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import arqproject.obj.UsersObj;
 
 public class Home {
 	@SuppressWarnings("resource")
-	public void entradaHome(String user){
-		JsonElement jelement = new JsonParser().parse(user);
-	    JsonObject jobject = jelement.getAsJsonObject();
+	public void entradaHome(UsersObj user){
 	    
-		new Menus().menuPrincipal(jobject.get("nome").getAsString());
-		
+		new Menus().menuPrincipal(user.getNome());
+//		System.out.println("id user: "+ jobject.get("_id"));
 		Scanner scanner = new Scanner(System.in);
 	    int choice = scanner.nextInt();
 
@@ -30,13 +26,21 @@ public class Home {
 	            break;
 	        case 2:
 	        	try {
-					
+					new Users().profile(user);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	            break;
 	        case 3:
+	        	try {
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            break;
+	        case 4:
 	        	System.out.print("Saiu do programa...");
 	            System.exit(0);
 	            
@@ -46,9 +50,10 @@ public class Home {
 	    }
 	}
 
-	@SuppressWarnings("resource")
-	private void listApostas(String user) {
+	private void listApostas(UsersObj user) {
 		
-		new ListaApostas().getListApostas();
+		new Games().getListGames(user);
+		
+//		new Games().newGames();
 	}
 }

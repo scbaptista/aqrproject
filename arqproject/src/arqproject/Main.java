@@ -2,15 +2,15 @@ package arqproject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.stream.Stream;
+
+import arqproject.obj.UsersObj;
 
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		
+//		new ConnectDb().conect(1,"equipa","equipa");
 		run(); 
 		
 	}
@@ -27,7 +27,7 @@ public class Main {
 	        case 1:
 	        	
 				try {
-					String result = new Login().doLogin();
+					UsersObj result = new Login().doLogin();
 					if(result != null){
 						new Home().entradaHome(result);
 					}else{
@@ -43,8 +43,10 @@ public class Main {
 	            break;
 	        case 2:
 	        	try {
-					String result = new Registar().doRegisto();
-					if(result != null){
+					String result = new Users().doRegisto();
+					if(result != null && result.contains("Erro")){
+						result = new Users().doRegisto();
+					}if(result != null){
 						System.out.println("O seu registo foi feito com sucesso");
 						new Main().run();
 					}else{
@@ -61,6 +63,11 @@ public class Main {
 	        	System.out.print("Saiu do programa...");
 	            System.exit(0);
 	            
+	            break;
+	            
+	        case 4:
+//	        	String result = new ConnectDb().conect(10, "", "equipa");
+//	            System.out.println(result);
 	            break;
 	        default:
 	            // The user input an unexpected choice.
