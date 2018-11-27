@@ -1,5 +1,7 @@
 package arqproject;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.bson.Document;
@@ -7,6 +9,8 @@ import org.bson.Document;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
@@ -56,12 +60,13 @@ public class Users {
 		return finalResult;
 	}
 
-	@SuppressWarnings("resource")
+	@SuppressWarnings({ "resource", "static-access" })
 	public void profile(UsersObj user) {
 	
 		ConnectDb con = new ConnectDb();
 		MongoCollection<Document> table = con.getCon().getCollection("users"); 
 		FindIterable<Document> iterDoc = table.find();
+
 		 
 		System.out.println("-------------------------------------");
 		System.out.println("------------ User -------------");
@@ -99,15 +104,25 @@ public class Users {
 						document.append("email", email);
 					}
 					
-					table.updateOne(iterable_element, document);
+					table.updateOne(iterable_element, new Document("$set", document));
 					
 					
-					System.out.println(table.find().iterator().toString());
+					System.out.println("Update sucesso");
 					
 					new Home().entradaHome(user);
 					
 					break;
 				case 2:
+					
+					table.deleteOne(iterable_element);
+					System.out.println(table.find().iterator().equals(iterable_element));
+					if(!table.find().iterator().equals(iterable_element)){
+						System.out.println("Delete sucesso");
+						
+						new StartMenu().run();
+					}
+					
+					
 					
 					break;
 				case 3:

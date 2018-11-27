@@ -19,7 +19,8 @@ public class Menus {
 		System.out.println("1 - Ver lista de apostas");
 		System.out.println("2 - Perfile");
 		System.out.println("3 - Historico");
-		System.out.println("4 - Sair");
+		System.out.println("4 - Logout");
+		System.out.println("5 - Sair");
 		System.out.println("-------------------------\n");
 	}
 

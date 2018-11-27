@@ -35,12 +35,11 @@ public class Login {
 			 if(iterable_element.containsValue(email) && iterable_element.containsValue(pass)){
 				 user.setId(iterable_element.get("_id").toString());
 				 user.setNome(iterable_element.get("nome").toString());
-					
+				 
 			 }
 		 }
-		
-		
-		return user;
+
+		return user.getId() != null ? user : null;
 		
 	}
 

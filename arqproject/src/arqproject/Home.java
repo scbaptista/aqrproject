@@ -41,6 +41,9 @@ public class Home {
 				}
 	            break;
 	        case 4:
+	        	new StartMenu().run();	            
+	            break;
+	        case 5:
 	        	System.out.print("Saiu do programa...");
 	            System.exit(0);
 	            
