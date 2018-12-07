@@ -22,6 +22,7 @@ public class User {
         this.id = id;
         this.email = email;
         this.name = name;
+        this.password = password;
         this.essCoins = essCoins;
     }
 

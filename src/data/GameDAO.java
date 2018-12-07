@@ -59,7 +59,7 @@ public class GameDAO {
             con = ConnectDB.connect();
             Statement stm = con.createStatement();
             stm.executeQuery("USE aegisBet;");
-            ResultSet results = stm.executeQuery("SELECT Game.* FROM Game INNER JOIN Bet AS Bet.idGame=Game.id WHERE Bet.idUser = "+idUser+";");
+            ResultSet results = stm.executeQuery("SELECT Game.* FROM Game INNER JOIN Bet ON Bet.idGame=Game.id WHERE Bet.idUser = "+idUser+";");
             while(results.next()) {
                 int id = results.getInt("id");
                 String hTeam = results.getString("houseTeam");

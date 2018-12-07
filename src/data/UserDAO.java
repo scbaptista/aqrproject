@@ -71,10 +71,10 @@ public class UserDAO {
             con = ConnectDB.connect();
             Statement stm = con.createStatement();
             stm.executeQuery("USE aegisBet;");
-            ResultSet result = stm.executeQuery("SELECT * FROM User WHERE id = '"+id+"';");
+            ResultSet result = stm.executeQuery("SELECT * FROM User WHERE id = "+id+";");
             if(result.next()) {
-                stm.executeUpdate("UPDATE User SET email="+email+", password="+password+", name="+name+" WHERE id="+id+";");
                 u = new User(result.getInt("id"),email,password,name,result.getFloat("essCoins"));
+                stm.executeUpdate("UPDATE User SET email='"+email+"', password='"+password+"', name='"+name+"' WHERE id="+id+";");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,7 +96,7 @@ public class UserDAO {
             
             if(result.next()) {
                 float newVal = result.getFloat("essCoins") + value;
-                stm.executeUpdate("UPDATE User SET essCoins = '"+ newVal + " WHERE id ="+id+";");
+                stm.executeUpdate("UPDATE User SET essCoins = "+ newVal + " WHERE id ="+id+";");
                 ret = 1;
             }
             

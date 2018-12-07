@@ -8,6 +8,7 @@ package business;
 import data.BetDAO;
 import data.GameDAO;
 import data.UserDAO;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -58,6 +59,10 @@ public class AegisBet {
         };
     }
     
+    public User getUser() {
+        return this.user;
+    }
+    
     public int login(String email, String password) {
         this.user = this.uDAO.login(email, password);
         if(this.user == null) return 0;
@@ -83,7 +88,11 @@ public class AegisBet {
     }
     
     public int updateCoins (float value) {
-        return this.uDAO.updateCoins(value, this.user.getId());
+        if(this.uDAO.updateCoins(value, this.user.getId()) == 1){
+            this.user.setEssCoins(this.user.getEssCoins()+value);
+            return 1;
+        }
+        return 0;
     }
     
     public Set<Game> getAvailableGames() {
@@ -94,9 +103,13 @@ public class AegisBet {
         return this.gDAO.history(this.user.getId());
     }
     
-    public int addBet(int idGame, float amount, int type) {
-        return this.bDAO.addBet(this.user.getId(), idGame, amount, type);
+    public int makeBet(int idGame, float amount, int type) {
+        if(this.user.getEssCoins()-amount>=0) {
+            if(this.bDAO.makeBet(this.user.getId(), idGame, amount, type)==1) {
+                return updateCoins(-amount);
+            }
+        }
+        return 0;
     }
     
-   
 }

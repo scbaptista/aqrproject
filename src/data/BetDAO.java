@@ -19,7 +19,7 @@ import java.util.Set;
 public class BetDAO {
     private Connection con;
     
-    public int addBet(int idUser, int idGame, float amount, int type) {
+    public int makeBet(int idUser, int idGame, float amount, int type) {
         int bet = 0;
         try {
             con = ConnectDB.connect();
@@ -28,9 +28,9 @@ public class BetDAO {
             ResultSet result = stm.executeQuery("SELECT * FROM Bet WHERE idUser = "+idUser+" AND idGame = "+idGame+";");
             if(!result.next()) {
                 ResultSet res = stm.executeQuery("SELECT * FROM Game WHERE id = "+idGame+";");
-                boolean status = res.getBoolean("status");
-                if(status) {
+                if(res.next() && res.getBoolean("status")) {
                     stm.executeUpdate("INSERT INTO Bet (idUser,idGame,amount,type,notified) VALUES ("+idUser+","+idGame+","+amount+","+type+",0);");
+                    bet = 1;
                 }
             }
         } catch (Exception e) {
@@ -48,8 +48,8 @@ public class BetDAO {
             con = ConnectDB.connect();
             Statement stm = con.createStatement();
             stm.executeQuery("USE aegisBet;");
-            ResultSet result = stm.executeQuery("SELECT Bet.* FROM Bet INNER JOIN Game AS Game.id = Bet.idGame WHERE Bet.notified = 0 AND Bet.idUser = "+id+" AND Game.ended = 1;");
-            while(!result.next()) {
+            ResultSet result = stm.executeQuery("SELECT Bet.* FROM Bet INNER JOIN Game ON Game.id = Bet.idGame WHERE Bet.notified = 0 AND Bet.idUser = "+id+" AND Game.ended = 1;");
+            while(result.next()) {
                 int idUser = result.getInt("idUser");
                 int idGame = result.getInt("idGame");
                 float amount = result.getFloat("amount");
@@ -74,7 +74,7 @@ public class BetDAO {
             con = ConnectDB.connect();
             Statement stm = con.createStatement();
             stm.executeQuery("USE aegisBet;");
-            ResultSet result = stm.executeQuery("UPDATE Bet SET notified = 1 WHERE idUser = "+idUser+" AND idGame = "+idGame+";");
+            stm.executeUpdate("UPDATE Bet SET notified = 1 WHERE idUser = "+idUser+" AND idGame = "+idGame+";");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
