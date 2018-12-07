@@ -8,7 +8,6 @@ package business;
 import data.BetDAO;
 import data.GameDAO;
 import data.UserDAO;
-import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -20,43 +19,12 @@ public class AegisBet {
     private UserDAO uDAO;
     private GameDAO gDAO;
     private BetDAO bDAO;
-    private Thread t;
     
     public AegisBet() {
         this.user = null;
         this.uDAO = new UserDAO();
         this.gDAO = new GameDAO();
         this.bDAO = new BetDAO();
-        
-        this.t = new Thread("updateThread") {
-            public void run() {
-                while(true) {
-                    Set<Bet> bets = bDAO.getToNotify(user.getId());
-                    
-                    for(Bet b: bets) {
-                        float value = 0;
-                        
-                        Game g = gDAO.getGame(b.getIdGame());
-                        
-                        if(b.getType() == 0 && g.getGoalsHT()>g.getGoalsGT())
-                            value = b.getAmount() * g.getOddVictory();
-                        else if(b.getType() == 1 && g.getGoalsHT()==g.getGoalsGT())
-                            value = b.getAmount() * g.getOddDraw();
-                        else value = b.getAmount() * g.getOddDefeat();
-                        
-                        uDAO.updateCoins(value, user.getId());
-                        user.updateCoins(value);
-                        bDAO.notify(b.getIdUser(),b.getIdGame());
-                        
-                        try{
-                            Thread.sleep(10000);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        };
     }
     
     public User getUser() {
@@ -66,7 +34,8 @@ public class AegisBet {
     public int login(String email, String password) {
         this.user = this.uDAO.login(email, password);
         if(this.user == null) return 0;
-        this.t.start();
+        UpdateThread t = new UpdateThread(this);
+        t.start();
         return 1;
     }
     
@@ -110,6 +79,19 @@ public class AegisBet {
             }
         }
         return 0;
+    }
+    
+
+    public Set<Bet> getToNotify() {
+        return this.bDAO.getToNotify(user.getId());
+    }
+
+    public Game getGame(int idGame) {
+       return this.gDAO.getGame(idGame);
+    }
+
+    public void notify(int idGame) {
+        this.bDAO.notify(user.getId(),idGame);
     }
     
 }
