@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 /**
  *
@@ -52,30 +53,31 @@ public class GameDAO {
         return games;
     }
     
-    public Set<Game> history(int idUser) {
-        Set<Game> games = new HashSet<>();
+    public Vector<Vector> history(int idUser) {
+        Vector<Vector> hist = new Vector<>();
         
         try{
             con = ConnectDB.connect();
             Statement stm = con.createStatement();
             stm.executeQuery("USE aegisBet;");
-            ResultSet results = stm.executeQuery("SELECT Game.* FROM Game INNER JOIN Bet ON Bet.idGame=Game.id WHERE Bet.idUser = "+idUser+";");
+            ResultSet results = stm.executeQuery("SELECT Game.*,Bet.amount,Bet.type FROM Game INNER JOIN Bet ON Bet.idGame=Game.id WHERE Bet.idUser = "+idUser+" AND Bet.notified = 1;");
             while(results.next()) {
-                int id = results.getInt("id");
-                String hTeam = results.getString("houseTeam");
-                String gTeam = results.getString("guestTeam");
-                float oddV = results.getInt("oddVictory");
-                float oddDr = results.getInt("oddDraw");
-                float oddDf = results.getInt("oddDefeat");
-                String date = results.getString("date");
-                String tBegin = results.getString("timeBegin");
-                boolean status = results.getBoolean("status");
-                int goalsHT = results.getInt("goalsHT");
-                int goalsGT = results.getInt("goalsGT");
-                boolean ended = results.getBoolean("ended");
+                Vector<String> line = new Vector<>();
+                line.addElement("" + results.getInt("id"));
+                line.addElement(results.getString("houseTeam"));
+                line.addElement(results.getString("guestTeam"));
+                line.addElement("" + results.getFloat("oddVictory"));
+                line.addElement("" + results.getFloat("oddDraw"));
+                line.addElement("" + results.getFloat("oddDefeat"));
+                line.addElement(results.getString("date"));
+                line.addElement(results.getString("timeBegin"));
+                line.addElement("" + results.getInt("goalsHT"));
+                line.addElement("" + results.getInt("goalsGT"));
+                line.addElement("" + results.getFloat("amount"));
+                line.addElement("" + results.getInt("type"));
                 
-                Game g = new Game(id,hTeam,gTeam,oddV,oddDr,oddDf,date,tBegin,status,goalsHT,goalsGT,ended);
-                games.add(g);
+                
+                hist.addElement(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +85,7 @@ public class GameDAO {
             ConnectDB.close(con);
         }
         
-        return games;
+        return hist;
     }
 
     public Game getGame(int idGame) {
@@ -117,5 +119,40 @@ public class GameDAO {
         }
         
         return g;
+    }
+
+    public Vector<Vector> openBets(int id) {
+        Vector<Vector> bets = new Vector<>();
+        
+        try{
+            con = ConnectDB.connect();
+            Statement stm = con.createStatement();
+            stm.executeQuery("USE aegisBet;");
+            ResultSet results = stm.executeQuery("SELECT Game.*,Bet.amount,Bet.type FROM Game INNER JOIN Bet ON Bet.idGame=Game.id WHERE Bet.idUser = "+id+" AND Game.status = 1;");
+            while(results.next()) {
+                Vector<String> line = new Vector<>();
+                line.addElement("" + results.getInt("id"));
+                line.addElement(results.getString("houseTeam"));
+                line.addElement(results.getString("guestTeam"));
+                line.addElement("" + results.getFloat("oddVictory"));
+                line.addElement("" + results.getFloat("oddDraw"));
+                line.addElement("" + results.getFloat("oddDefeat"));
+                line.addElement(results.getString("date"));
+                line.addElement(results.getString("timeBegin"));
+                line.addElement("" + results.getInt("goalsHT"));
+                line.addElement("" + results.getInt("goalsGT"));
+                line.addElement("" + results.getFloat("amount"));
+                line.addElement("" + results.getInt("type"));
+                
+                
+                bets.addElement(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally  {
+            ConnectDB.close(con);
+        }
+        
+        return bets;
     }
 }

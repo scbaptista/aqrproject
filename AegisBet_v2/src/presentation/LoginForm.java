@@ -1,5 +1,6 @@
 package presentation;
 
+import business.AegisBet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -10,18 +11,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import business.User;
-
 public class LoginForm  {
-
+        private AegisBet aBet;
 	private JFrame frame;
 
 	public void loginPanel() {
-		
+		this.aBet = new AegisBet();
 		this.frame = new JFrame("Access Panel");
 		this.frame.setSize(1200, 700);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +66,7 @@ public class LoginForm  {
  
 		BufferedImage logoImg = null;
         try {
-        	logoImg = ImageIO.read(new File("logo.png"));
+        	logoImg = ImageIO.read(new File("img/logo.png"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -78,22 +78,16 @@ public class LoginForm  {
 		btnLogin.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	            	String uname = textEmail.getText();
-	     		    String pass = textPass.getText();
-//	     		    AegisBet user = new AegisBetDAO().login(uname, pass);
-	     		    
-
-	     		    User user = new User();
-	     		    user.setName("Sandra Baptista");
-	     		    user.setEssCoins(12);
-//	     		    if(user != null){
-	     		   if(uname.equals("ss") && pass.equals("ss")){
+	            	String email = textEmail.getText();
+	     		String pass = textPass.getText();
+                        
+                        if(LoginForm.this.aBet.login(email, pass) == 1) {
    		    	
 	     			  LoginForm.this.frame.dispose();
-	     			   new Home().home(user);
+	     			   new Home().home(LoginForm.this.aBet);
 	     		    	
 	     		    }else{
-	     		    	System.out.println("Erro");
+	     		    	JOptionPane.showMessageDialog(new JFrame(), "Email or Password Incorrect!", "Dialog", JOptionPane.ERROR_MESSAGE);
 	     		    }
 	            }
 	     });

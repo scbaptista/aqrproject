@@ -9,6 +9,7 @@ import data.BetDAO;
 import data.GameDAO;
 import data.UserDAO;
 import java.util.Set;
+import java.util.Vector;
 
 /**
  *
@@ -68,7 +69,7 @@ public class AegisBet {
         return this.gDAO.getAvailableGames();
     }
     
-    public Set<Game> history() {
+    public Vector<Vector> history() {
         return this.gDAO.history(this.user.getId());
     }
     
@@ -92,6 +93,10 @@ public class AegisBet {
 
     public void notify(int idGame) {
         this.bDAO.notify(user.getId(),idGame);
+    }
+
+    public Vector<Vector> openBets() {
+        return this.gDAO.openBets(this.user.getId());
     }
     
 }

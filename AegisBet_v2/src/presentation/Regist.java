@@ -1,5 +1,6 @@
 package presentation;
 
+import business.AegisBet;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import business.User;
+import javax.swing.JOptionPane;
 
 public class Regist {
 
@@ -70,7 +71,7 @@ public class Regist {
 		
 		BufferedImage myPicture = null;
         try {
-        	myPicture = ImageIO.read(new File("logo.png"));
+        	myPicture = ImageIO.read(new File("img/logo.png"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -82,14 +83,15 @@ public class Regist {
 		btnRegist.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	            	User user = new User();
-	            	user.setName(textName.getText());
-	            	user.setEmail(textEmail.getText());
-	            	user.setPassword(textPass.getText());
-	     		    
-	            	// insert os dados do utilizador usando os dados que estão a (user) 
-	            	Regist.this.frame.dispose();
-	            	new LoginForm().loginPanel();
+                        AegisBet a = new AegisBet();
+                        
+                        if(a.register(textEmail.getText(), textPass.getText(), textName.getText())==1) {
+                            Regist.this.frame.dispose();
+                            new LoginForm().loginPanel();
+                        } else 
+                            JOptionPane.showMessageDialog(new JFrame(), "Email already in use!", "Dialog", JOptionPane.ERROR_MESSAGE);
+                            Regist.this.frame.dispose();
+                            new LoginForm().loginPanel();
 	            }
 	     });
 		

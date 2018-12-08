@@ -3,14 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/TP1/Project/src/data/UserDAO.java</file>
-            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/TP1/Project/src/business/AegisBet.java</file>
-            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/TP1/Project/src/presentation/MainUI.java</file>
-            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/TP1/Project/src/data/BetDAO.java</file>
-            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/TP1/Project/src/data/GameDAO.java</file>
-            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/TP1/Project/src/business/User.java</file>
-            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/TP1/Project/src/presentation/HomeUI.java</file>
-            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/TP1/Project/src/data/ConnectDB.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/data/GameDAO.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/presentation/HistoryBet.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/presentation/Regist.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/presentation/LoginForm.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/data/BetDAO.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/business/AegisBet.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/business/UpdateThread.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/presentation/Main.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/presentation/UserProfile.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/presentation/Home.java</file>
+            <file>file:/Users/alexandre/Documents/Universidade/4º%20Ano/ESS/AS/Projeto/aqrproject/AegisBet_v2/src/presentation/BuyCoins.java</file>
         </group>
     </open-files>
 </project-private>

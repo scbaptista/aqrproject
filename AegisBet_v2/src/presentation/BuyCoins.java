@@ -1,5 +1,6 @@
 package presentation;
 
+import business.AegisBet;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,13 +18,14 @@ import javax.swing.JTextField;
 import business.User;
 
 public class BuyCoins {
-
+        private AegisBet aBet;
 	private JFrame frame;
 	private JTextField textBuyCoins;
 	private User user;
 
-	public void buycoins(User user) {
-		this.user = user;
+	public void buycoins(AegisBet aBet) {
+                this.aBet = aBet;
+		this.user = aBet.getUser();
 		
 		this.frame = new JFrame("Buy Coins");
 		this.frame.setSize(1200, 700);
@@ -60,7 +62,7 @@ public class BuyCoins {
 		
 		BufferedImage myPicture = null;
         try {
-        	myPicture = ImageIO.read(new File("logo.png"));
+        	myPicture = ImageIO.read(new File("img/logo.png"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -75,7 +77,7 @@ public class BuyCoins {
             @Override
             public void actionPerformed(ActionEvent e) {
             	BuyCoins.this.frame.dispose();
-            	new Home().home(BuyCoins.this.user);
+            	new Home().home(BuyCoins.this.aBet);
             	
             	
             }
@@ -86,11 +88,14 @@ public class BuyCoins {
             public void actionPerformed(ActionEvent e) {
             	
             	//TO DO 		    
-            	// update coins user
+                String v = BuyCoins.this.textBuyCoins.getText();
+                float value = Float.parseFloat(v);
+             
+            	BuyCoins.this.aBet.updateCoins(value);
             	
             	
             	BuyCoins.this.frame.dispose();
-            	new Home().home(BuyCoins.this.user);
+            	new Home().home(BuyCoins.this.aBet);
             	
             	
             }

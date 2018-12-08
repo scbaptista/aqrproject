@@ -1,14 +1,11 @@
-package main;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+package presentation;
 
 import presentation.LoginForm;
 
 public class Main {
 
 	public static void main(String[] args) {
-		new LoginForm().loginPanel();;
+		new LoginForm().loginPanel();
 		
 		
 	}

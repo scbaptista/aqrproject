@@ -19,16 +19,17 @@ import javax.swing.JTable;
 import business.User;
 import java.util.Vector;
 
-public class HistoryBet {
+public class StateBet {
+        
         private AegisBet aBet;
 	private User user;
 	private JFrame frame;
 
-	public void history(AegisBet aBet) {
+	public void state(AegisBet aBet) {
                 this.aBet = aBet;
 		this.user = aBet.getUser();
 		
-		this.frame = new JFrame("Bet history");
+		this.frame = new JFrame("Bet State");
 		this.frame.setSize(1200, 700);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -36,7 +37,6 @@ public class HistoryBet {
 		this.frame.add(setcontent(panel));
 		
 		this.frame.setVisible(true);
-		
 	}
 
 	private Component setcontent(JPanel panel) {
@@ -50,35 +50,34 @@ public class HistoryBet {
 			// TODO: handle exception
 		}
         
-        
-        
         JLabel picLabel = new JLabel(new ImageIcon(logoImg));
         picLabel.setBounds(10, 10, logoImg.getWidth(), logoImg.getHeight());
         panel.add(picLabel);
         
-		// the rowData going to be == to array that came from the data base
-				 Vector<Vector> rowData = HistoryBet.this.aBet.history();
-				 
-			    Vector<String> columnNames = new Vector<>();
-                            columnNames.addElement("Code Game");
-                            columnNames.addElement("House Team");
-                            columnNames.addElement("Guest Team");
-                            columnNames.addElement("Odds 1");
-                            columnNames.addElement("Odds 2");
-                            columnNames.addElement("Odds 3");
-                            columnNames.addElement("Date");
-                            columnNames.addElement("Type");
-                            columnNames.addElement("Goals HT");
-                            columnNames.addElement("Goals GT");
-                            columnNames.addElement("Amount");
-                            columnNames.addElement("Type");
-                            
-			    JTable table = new JTable(rowData, columnNames);
-			    table.setEnabled(false);
+        
+     // the rowData going to be == to array that came from the data base
+		Vector<Vector> rowData = StateBet.this.aBet.openBets();
+                
+                Vector<String> columnNames = new Vector<>();
+                columnNames.addElement("Code Game");
+                columnNames.addElement("House Team");
+                columnNames.addElement("Guest Team");
+                columnNames.addElement("Odds 1");
+                columnNames.addElement("Odds 2");
+                columnNames.addElement("Odds 3");
+                columnNames.addElement("Date");
+                columnNames.addElement("Type");
+                columnNames.addElement("Goals HT");
+                columnNames.addElement("Goals GT");
+                columnNames.addElement("Amount");
+                columnNames.addElement("Type");
+	    
+                JTable table = new JTable(rowData, columnNames);
+	    table.setEnabled(false);
 
-			    JScrollPane scrollPane = new JScrollPane(table);
-			    scrollPane.setBounds(50, 70, 1100, 400);
-			    
+	    JScrollPane scrollPane = new JScrollPane(table);
+	    scrollPane.setBounds(50, 70, 1100, 400);
+	    
 		panel.add(scrollPane);
 		
 		JButton  btnReturn = new JButton("Return");
@@ -86,15 +85,14 @@ public class HistoryBet {
 		panel.add(btnReturn);
 		
 		btnReturn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	HistoryBet.this.frame.dispose();
-            	new Home().home(HistoryBet.this.aBet);
-            }
+		   @Override
+		   public void actionPerformed(ActionEvent e) {
+		   	StateBet.this.frame.dispose();
+		   	new Home().home(StateBet.this.aBet);
+		   }
 		});
-		
-		
-			    
+
+        
 		return panel;
 	}
 

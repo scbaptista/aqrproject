@@ -1,5 +1,6 @@
 package presentation;
 
+import business.AegisBet;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,13 +20,15 @@ import business.User;
 
 public class UserProfile {
 
+        private AegisBet aBet;
 	private JFrame frame;
 	private User user;
 	private JTextField textName;
 	private JTextField textEmail;
 	private JPasswordField textPass;
 
-	public void profile(int id) {
+	public void profile(AegisBet aBet) {
+                this.aBet = aBet;
 		this.frame = new JFrame("User Profile");
 		this.frame.setSize(1200, 700);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,11 +39,11 @@ public class UserProfile {
 
 		this.frame.setVisible(true);
 		
-		setUserInformation();
+		setUserInformation(aBet.getUser());
 	}
 
-	private void setUserInformation() {
-		this.user = new User();
+	private void setUserInformation(User u) {
+		this.user = u;
 		//this.user = new AegisBet().getUser(id);
 		this.textName.setText(this.user.getName());
 		this.textEmail.setText(this.user.getEmail());
@@ -85,7 +88,7 @@ public class UserProfile {
 		
 		BufferedImage myPicture = null;
         try {
-        	myPicture = ImageIO.read(new File("logo.png"));
+        	myPicture = ImageIO.read(new File("img/logo.png"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -100,7 +103,7 @@ public class UserProfile {
             @Override
             public void actionPerformed(ActionEvent e) {
             	UserProfile.this.frame.dispose();
-            	new Home().home(UserProfile.this.user);
+            	new Home().home(UserProfile.this.aBet);
             	
             	
             }
@@ -115,12 +118,12 @@ public class UserProfile {
             	UserProfile.this.user.setPassword(textPass.getText());
      		    
             	//TO DO 	
-            	// update os dados do utilizador usando os dados que estão a UserProfile.this.user 
+            	// update os dados do utilizador usando os dados que estï¿½o a UserProfile.this.user 
             	
             	
             	
             	UserProfile.this.frame.dispose();
-            	new Home().home(UserProfile.this.user);
+            	new Home().home(UserProfile.this.aBet);
             	
             	
             }
