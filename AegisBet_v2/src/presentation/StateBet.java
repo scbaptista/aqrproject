@@ -18,12 +18,18 @@ import javax.swing.JTable;
 
 import business.User;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
-public class StateBet {
+public class StateBet implements UserObserver {
         
         private AegisBet aBet;
 	private User user;
 	private JFrame frame;
+        private JPanel panel;
+    private Vector<Vector> rowData;
+    private JTable table;
+    private Vector<Object> columnNames;
+       
 
 	public void state(AegisBet aBet) {
                 this.aBet = aBet;
@@ -33,7 +39,7 @@ public class StateBet {
 		this.frame.setSize(1200, 700);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		this.frame.add(setcontent(panel));
 		
 		this.frame.setVisible(true);
@@ -56,9 +62,9 @@ public class StateBet {
         
         
      // the rowData going to be == to array that came from the data base
-		Vector<Vector> rowData = StateBet.this.aBet.openBets();
+		this.rowData = StateBet.this.aBet.openBets();
                 
-                Vector<String> columnNames = new Vector<>();
+                this.columnNames = new Vector<>();
                 columnNames.addElement("Code Game");
                 columnNames.addElement("House Team");
                 columnNames.addElement("Guest Team");
@@ -72,7 +78,7 @@ public class StateBet {
                 columnNames.addElement("Amount");
                 columnNames.addElement("Type");
 	    
-                JTable table = new JTable(rowData, columnNames);
+                this.table = new JTable(rowData, columnNames);
 	    table.setEnabled(false);
 
 	    JScrollPane scrollPane = new JScrollPane(table);
@@ -95,5 +101,15 @@ public class StateBet {
         
 		return panel;
 	}
+
+    public void update() {
+        JOptionPane.showMessageDialog(new JFrame(), "GAME HAS CLOSE CHECK YOU HISTORY FOR MORE INFORMATIONS", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+                        StateBet.this.frame.dispose();
+		   	new Home().home(StateBet.this.aBet);
+//this.frame.remove(this.panel);
+        //this.panel.setLayout(null);
+        //this.panel = new JPanel();
+        //this.frame.add(setcontent(this.panel));
+    }
 
 }

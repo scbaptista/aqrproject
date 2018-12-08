@@ -18,8 +18,9 @@ import javax.swing.JTable;
 
 import business.User;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
-public class HistoryBet {
+public class HistoryBet implements UserObserver {
         private AegisBet aBet;
 	private User user;
 	private JFrame frame;
@@ -97,5 +98,11 @@ public class HistoryBet {
 			    
 		return panel;
 	}
+
+    @Override
+    public void update() {
+        JOptionPane.showMessageDialog(new JFrame(), "GAME HAS CLOSE CHECK YOU HISTORY FOR MORE INFORMATIONS", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+        
+    }
 
 }

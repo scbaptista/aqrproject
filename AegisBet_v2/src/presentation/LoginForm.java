@@ -80,11 +80,11 @@ public class LoginForm  {
 	            public void actionPerformed(ActionEvent e) {
 	            	String email = textEmail.getText();
 	     		String pass = textPass.getText();
-                        
-                        if(LoginForm.this.aBet.login(email, pass) == 1) {
+                        Home h = new Home();
+                        if(LoginForm.this.aBet.login(email, pass,h) == 1) {
    		    	
 	     			  LoginForm.this.frame.dispose();
-	     			   new Home().home(LoginForm.this.aBet);
+	     			  h.home(LoginForm.this.aBet);
 	     		    	
 	     		    }else{
 	     		    	JOptionPane.showMessageDialog(new JFrame(), "Email or Password Incorrect!", "Dialog", JOptionPane.ERROR_MESSAGE);

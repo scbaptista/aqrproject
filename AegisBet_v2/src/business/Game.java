@@ -7,7 +7,8 @@ package business;
 
 /**
  *
- * @author alexandre
+ * @author Alexandre Teixeira
+ * @author Sandra Batista
  */
 public class Game {
     private int id;

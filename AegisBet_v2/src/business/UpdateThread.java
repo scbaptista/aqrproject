@@ -6,16 +6,22 @@
 package business;
 
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import presentation.UserObserver;
 
 /**
  *
- * @author alexandre
+ * @author Alexandre Teixeira
+ * @author Sandra Batista
  */
 public class UpdateThread extends Thread {
     private AegisBet a;
+    private UserObserver u;
     
-    public UpdateThread(AegisBet a) {
+    public UpdateThread(AegisBet a, UserObserver u) {
         this.a = a;
+        this.u = u;
     }
     
     public void run() {
@@ -35,6 +41,7 @@ public class UpdateThread extends Thread {
                 
                 this.a.updateCoins(value);
                 this.a.notify(b.getIdGame());
+                this.u.update();
                 
                 try{
                     this.sleep(10000);

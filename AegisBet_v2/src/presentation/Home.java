@@ -29,11 +29,11 @@ import java.util.Set;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 
-public class Home {
+public class Home implements UserObserver {
 	private JFrame frame;
 	private User user;
         private AegisBet aBet;
-	
+	private JLabel userCoins;
 
 	public void home(AegisBet aBet) {
 		this.aBet = aBet;
@@ -159,12 +159,14 @@ public class Home {
         panel.add(picLabel);
 
         JLabel userImg = new JLabel(this.user.getName(), new ImageIcon("img/user.png"), 0);
-        JLabel userCoins = new JLabel(""+this.user.getEssCoins(), new ImageIcon("img/coins.png"), 0);
+        this.userCoins = new JLabel(""+this.user.getEssCoins(), new ImageIcon("img/coins.png"), 0);
         JLabel lbUserCoins = new JLabel("<html><font>"+this.user.getName()+" have </font> <font color='green'>"+this.user.getEssCoins()+"</font><font> coins</font>" );
-	userImg.setBounds(905, 20, 400, 20 );
-        userCoins.setBounds(905, 40, 400, 20 );
-        panel.add(userImg);
-        panel.add(userCoins);
+	//userImg.setBounds(905, 20, 400, 20 );
+        //this.userCoins.setBounds(905, 40, 400, 20 );
+        //panel.add(userImg);
+        //panel.add(this.userCoins);
+        lbUserCoins.setBounds(905, 20, 400, 20 );
+        panel.add(lbUserCoins);
 		//add table games
 		panel.add(setTableGames());
 		
@@ -278,4 +280,12 @@ public class Home {
 		
             return scrollPane;
         }
+
+    @Override
+    public void update() {
+        JOptionPane.showMessageDialog(new JFrame(), "GAME HAS CLOSE CHECK YOU HISTORY FOR MORE INFORMATIONS", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+        setTableGames();
+        userCoins = new JLabel(""+this.user.getEssCoins(), new ImageIcon("img/coins.png"), 0);
+        
+    }
 }

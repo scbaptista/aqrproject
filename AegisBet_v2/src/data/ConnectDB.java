@@ -11,7 +11,8 @@ import java.sql.SQLException;
 
 /**
  *
- * @author alexandre
+ * @author Alexandre Teixeira
+ * @author Sandra Batista
  */
 public class ConnectDB {
     private static final String host = "localhost";

@@ -5,15 +5,15 @@
  */
 package business;
 
-import data.BetDAO;
-import data.GameDAO;
-import data.UserDAO;
+import data.*;
 import java.util.Set;
 import java.util.Vector;
+import presentation.Home;
 
 /**
  *
- * @author alexandre
+ * @author Alexandre Teixeira
+ * @author Sandra Batista
  */
 public class AegisBet {
     private User user;
@@ -23,19 +23,19 @@ public class AegisBet {
     
     public AegisBet() {
         this.user = null;
-        this.uDAO = new UserDAO();
-        this.gDAO = new GameDAO();
-        this.bDAO = new BetDAO();
+        this.uDAO = new UserDAOImpl();
+        this.gDAO = new GameDAOImpl();
+        this.bDAO = new BetDAOImpl();
     }
     
     public User getUser() {
         return this.user;
     }
     
-    public int login(String email, String password) {
+    public int login(String email, String password, Home u) {
         this.user = this.uDAO.login(email, password);
         if(this.user == null) return 0;
-        UpdateThread t = new UpdateThread(this);
+        UpdateThread t = new UpdateThread(this,u);
         t.start();
         return 1;
     }
